@@ -4,20 +4,32 @@ import utilitarios.Utils;
 
 public class Conta {
 
-    private static int contadorDeContas = 1;
+    private static int idDeContas = 1;
+    private static int numeroDeContas = 1001;
 
-    private int numeroConta;
+    private int idContas;
+    private long numeroConta;
     private Cliente cliente;
     private Double saldo = 0.0;
 
     public Conta(Cliente cliente) {
-        this.numeroConta = contadorDeContas;
+        this.idContas = idDeContas;
+        this.numeroConta = numeroDeContas;
         this.cliente = cliente;
-        contadorDeContas += 1;
+        numeroDeContas += 1;
+        idDeContas += 1;
+    }
+
+    public int getIdContas() {
+        return idContas;
+    }
+
+    public void setIdContas(int idContas) {
+        this.idContas = idContas;
     }
 
     public int getNumeroConta() {
-        return numeroConta;
+        return (int) numeroConta;
     }
 
     public void setNumeroConta(int numeroConta) {
@@ -41,8 +53,9 @@ public class Conta {
     }
 
     public String toString() {
-        return "\nNúmero da conta: " + this.getNumeroConta() +
-                "\nNome: " + this.cliente.getNome() +
+        return "\nID da conta: " + this.getIdContas() +
+                "\nNúmero da conta: " + this.getNumeroConta() +
+                "\nNome: " + this.cliente.getNome() + " " + cliente.getSobrenome() +
                 "\nCPF: " + this.cliente.getCPF() +
                 "\nEmail: " + this.cliente.getEmail() +
                 "\nSaldo: " + Utils.doubleToString(this.getSaldo()) +

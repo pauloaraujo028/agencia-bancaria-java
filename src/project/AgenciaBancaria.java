@@ -15,17 +15,19 @@ public class AgenciaBancaria {
 
     public static void operacoes() {
 
-        System.out.println("----------------------------------------------------");
-        System.out.println("-----------* Bem vindos a nossa Agência *-----------");
-        System.out.println("---* Selecione uma operação que deseja realizar *---");
-        System.out.println("----------------------------------------------------");
+        System.out.println("|--------------------------------------------------|");
+        System.out.println("|----------* Bem vindos a nossa Agência *----------|");
+        System.out.println("|--------------------------------------------------|");
+        System.out.println("|-----* Selecione uma operação para continuar *----|");
+        System.out.println("|--------------------------------------------------|");
         System.out.println("|                Opção 1 - Criar conta             |");
         System.out.println("|                Opção 2 - Depósitar               |");
         System.out.println("|                Opção 3 - Sacar                   |");
         System.out.println("|                Opção 4 - Transferir              |");
         System.out.println("|                Opção 5 - Listar                  |");
-        System.out.println("|                Opção 6 - Sair                    |");
-        System.out.println("----------------------------------------------------");
+        System.out.println("|                Opção 6 - Cancelar                |");
+        System.out.println("|                Opção 7 - Sair                    |");
+        System.out.println("|--------------------------------------------------|");
 
         int operacao = input.nextInt();
 
@@ -35,7 +37,8 @@ public class AgenciaBancaria {
             case 3 -> sacar();
             case 4 -> transferir();
             case 5 -> listarContas();
-            case 6 -> {
+            case 6 -> cancelar();
+            case 7 -> {
                 System.out.println("Obrigado por utilizar nossa Agência!");
                 System.exit(0);
             }
@@ -51,13 +54,16 @@ public class AgenciaBancaria {
         System.out.println("\nNome: ");
         String nome = input.next();
 
+        System.out.println("\nSobrenome: ");
+        String sobrenome = input.next();
+
         System.out.println("\nCPF: ");
         String cpf = input.next();
 
         System.out.println("\nEmail: ");
         String email = input.next();
 
-        Cliente cliente = new Cliente(nome, cpf, email);
+        Cliente cliente = new Cliente(nome, sobrenome, cpf, email);
 
         Conta conta = new Conta(cliente);
 
@@ -128,7 +134,7 @@ public class AgenciaBancaria {
             Conta contaDestinatario = encontrarConta(numeroContaDestinatario);
 
             if(contaDestinatario != null) {
-                System.out.println("'   1Valor da transferência: ");
+                System.out.println("Valor da transferência: ");
                 Double valor = input.nextDouble();
 
                 contaRemetente.transferir(contaDestinatario, valor);
@@ -139,6 +145,30 @@ public class AgenciaBancaria {
         }else {
             System.out.println("Conta para transferência não encontrada!");
             System.out.println("\n");
+        }
+        operacoes();
+    }
+
+    public static void cancelar() {
+        System.out.println("Número da conta: ");
+        int numeroConta = input.nextInt();
+
+        Conta conta = encontrarConta(numeroConta);
+
+        if (conta != null) {
+            System.out.println("Deseja realmente cancelar a conta?");
+            System.out.println("Digite 1 para SIM e 2 para NÃO");
+            int confirmar = input.nextInt();
+
+            if (confirmar == 1) {
+                contasBancarias.remove(conta);
+                System.out.println("Conta cancelada com sucesso!");
+            }else {
+                System.out.println("Operação cancelada!");
+            }
+
+        }else {
+            System.out.println("Conta não encontrada!");
         }
         operacoes();
     }

@@ -5,14 +5,19 @@ public class Cliente {
     private static int count = 1;
 
     private String nome;
+    private String sobrenome;
     private String cpf;
     private String email;
 
-    public Cliente(String nome, String cpf, String email) {
+    public Cliente(String nome, String sobrenome, String cpf, String email) {
         this.nome = nome;
+        this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.email = email;
         count += 1;
+    }
+
+    public Cliente(String nome, String sobrenome) {
     }
 
     public String getNome() {
@@ -21,6 +26,14 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getCPF() {
@@ -41,6 +54,7 @@ public class Cliente {
 
     public String toString() {
         return "\nNome: " + this.getNome() +
+                "\nSobrenome: " + this.getSobrenome() +
                 "\nCPF: " + this.getCPF() +
                 "\nEmail: " + this.getEmail();
     }
